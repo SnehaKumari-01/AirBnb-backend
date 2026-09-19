@@ -5,6 +5,7 @@
 *.war
 .idea/
 *.iml
+.mvn/
 
 # Node / Vite Frontend
 **/node_modules/
