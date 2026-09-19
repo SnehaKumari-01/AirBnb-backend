@@ -1,0 +1,14 @@
+# Java / Maven
+**/target/
+*.class
+*.jar
+*.war
+.idea/
+*.iml
+
+# Node / Vite Frontend
+**/node_modules/
+**/dist/
+.env
+.env.local
+.DS_Store
