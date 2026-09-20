@@ -89,8 +89,10 @@ export const adminService = {
         hostEmail: hostEmail || 'manager@hotel.in',
         hostName: hostName || hotelDto.hostName || 'Hotel Owner',
         active: true,
-        rating: 4.8,
+        rating: 5.0,
         reviewsCount: 1,
+        hostingYears: 0,
+        joinedYear: new Date().getFullYear(),
         photos: hotelDto.photos?.length ? hotelDto.photos : ['https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80'],
         rooms: [
           {

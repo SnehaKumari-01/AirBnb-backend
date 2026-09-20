@@ -190,7 +190,11 @@ export const ListingDetailPage = () => {
             <div className="flex items-center justify-between pb-6 border-b border-gray-200">
               <div>
                 <h2 className="text-xl font-bold text-gray-900">Hosted by {hotel.hostName || 'Eleni & Nikos'}</h2>
-                <p className="text-sm text-gray-500 mt-1">Superhost · 4 years hosting · Response rate: 100%</p>
+                <p className="text-sm text-gray-500 mt-1">
+                  {hotel.hostingYears && hotel.hostingYears > 0
+                    ? `Superhost · ${hotel.hostingYears} years hosting · Response rate: 100%`
+                    : `New Host · Hosting on Airbnb since ${hotel.joinedYear || new Date().getFullYear()}`}
+                </p>
               </div>
               <img 
                 src={hotel.hostImage || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80'} 
@@ -204,8 +208,14 @@ export const ListingDetailPage = () => {
               <div className="flex items-start gap-4">
                 <Award className="h-6 w-6 text-[#FF385C] mt-1 shrink-0" />
                 <div>
-                  <h3 className="font-semibold text-gray-900 text-sm">Superhost Experience</h3>
-                  <p className="text-xs text-gray-500">Superhosts are experienced, highly rated hosts committed to providing great stays.</p>
+                  <h3 className="font-semibold text-gray-900 text-sm">
+                    {hotel.hostingYears && hotel.hostingYears > 0 ? 'Superhost Experience' : 'New Host Listing'}
+                  </h3>
+                  <p className="text-xs text-gray-500">
+                    {hotel.hostingYears && hotel.hostingYears > 0 
+                      ? 'Superhosts are experienced, highly rated hosts committed to providing great stays.'
+                      : 'This property is hosted by a newly registered host on Airbnb.'}
+                  </p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
