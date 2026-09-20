@@ -12,11 +12,13 @@ export const CheckoutPage = () => {
   const { activeBooking, addBooking } = useBooking();
   const { user, openAuthModal } = useAuth();
 
-  const [step, setStep] = useState(1); // 1: Guests Info, 2: Payment, 3: Confirmation
   const [guestList, setGuestList] = useState([
-    { name: user?.name || 'Alex Johnson', gender: 'MALE', age: 29 },
-    { name: 'Maria Johnson', gender: 'FEMALE', age: 28 }
+    { name: user?.name || '', gender: 'MALE', age: '' }
   ]);
+  const [cardNumber, setCardNumber] = useState('');
+  const [cardExpiry, setCardExpiry] = useState('');
+  const [cardCvv, setCardCvv] = useState('');
+  const [cardName, setCardName] = useState(user?.name || '');
   const [loading, setLoading] = useState(false);
   const [paymentSessionUrl, setPaymentSessionUrl] = useState('');
 
@@ -208,25 +210,50 @@ export const CheckoutPage = () => {
                   </div>
 
                   <div className="space-y-3">
-                    <input
-                      type="text"
-                      placeholder="Card Number: 4532 •••• •••• 8892"
-                      defaultValue="4532 9812 3456 8892"
-                      className="w-full px-3 py-2.5 bg-white border border-gray-300 rounded-xl text-sm font-mono"
-                    />
-                    <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-700 mb-1">Name on Card</label>
                       <input
                         type="text"
-                        placeholder="MM/YY"
-                        defaultValue="12/28"
-                        className="w-full px-3 py-2.5 bg-white border border-gray-300 rounded-xl text-sm font-mono"
+                        placeholder="e.g. John Doe"
+                        value={cardName}
+                        onChange={(e) => setCardName(e.target.value)}
+                        className="w-full px-3 py-2.5 bg-white border border-gray-300 rounded-xl text-sm"
                       />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-700 mb-1">Card Number</label>
                       <input
-                        type="password"
-                        placeholder="CVV"
-                        defaultValue="882"
+                        type="text"
+                        maxLength="19"
+                        placeholder="1234 5678 9012 3456"
+                        value={cardNumber}
+                        onChange={(e) => setCardNumber(e.target.value)}
                         className="w-full px-3 py-2.5 bg-white border border-gray-300 rounded-xl text-sm font-mono"
                       />
+                    </div>
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-xs font-semibold text-gray-700 mb-1">Expiry Date</label>
+                        <input
+                          type="text"
+                          maxLength="5"
+                          placeholder="MM/YY"
+                          value={cardExpiry}
+                          onChange={(e) => setCardExpiry(e.target.value)}
+                          className="w-full px-3 py-2.5 bg-white border border-gray-300 rounded-xl text-sm font-mono"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-semibold text-gray-700 mb-1">CVV</label>
+                        <input
+                          type="password"
+                          maxLength="4"
+                          placeholder="CVV"
+                          value={cardCvv}
+                          onChange={(e) => setCardCvv(e.target.value)}
+                          className="w-full px-3 py-2.5 bg-white border border-gray-300 rounded-xl text-sm font-mono"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
